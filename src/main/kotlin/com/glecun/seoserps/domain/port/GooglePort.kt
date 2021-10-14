@@ -1,8 +1,8 @@
 package com.glecun.seoserps.domain.port
 
-import com.glecun.seoserps.domain.entity.Site
+import com.glecun.seoserps.domain.entity.Sites
 
 interface GooglePort {
 
-    fun getBestSitesForRequest(request: String) : Array<Site>
+    fun getBestSitesForRequest(request: String) : Sites
 }

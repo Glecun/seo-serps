@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RestController
 class WordsResource @Autowired constructor(val getBestWordsForSentence: GetBestWordsForSentence) {
 
     @GetMapping("/words")
-    fun getWords(@RequestParam sentence: String): Array<Words> = getBestWordsForSentence(sentence)
+    fun getWords(@RequestParam sentence: String): Words = getBestWordsForSentence(sentence)
 
 }

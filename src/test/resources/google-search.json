@@ -1,0 +1,114 @@
+{
+   "kind": "customsearch#search",
+   "context": {
+      "title": "seo-serps"
+   },
+   "queries": {
+      "request": [
+         {
+            "inputEncoding": "utf8",
+            "totalResults": "42900000",
+            "startIndex": 1,
+            "outputEncoding": "utf8",
+            "searchTerms": "lol",
+            "cx": "950d0abc10c8343a8",
+            "count": 10,
+            "safe": "off",
+            "title": "Google Custom Search - lol",
+            "cr": "countryFR"
+         }
+      ],
+      "nextPage": [
+         {
+            "inputEncoding": "utf8",
+            "totalResults": "42900000",
+            "startIndex": 11,
+            "outputEncoding": "utf8",
+            "searchTerms": "lol",
+            "cx": "950d0abc10c8343a8",
+            "count": 10,
+            "safe": "off",
+            "title": "Google Custom Search - lol",
+            "cr": "countryFR"
+         }
+      ]
+   },
+   "searchInformation": {
+      "searchTime": 0.615833,
+      "totalResults": "42900000",
+      "formattedTotalResults": "42,900,000",
+      "formattedSearchTime": "0.62"
+   },
+   "items": [
+      {
+         "snippet": "We track the millions of LoL games played every day to gather champion stats, matchups, builds & summoner rankings, as well as champion stats, popularity, ...",
+         "htmlFormattedUrl": "https://www.leagueofgraphs.com/",
+         "htmlTitle": "LeagueOfGraphs: <b>LoL<\/b> Champions &amp; Summoners Stats &amp; Rankings",
+         "kind": "customsearch#result",
+         "pagemap": {
+            "cse_thumbnail": [
+               {
+                  "src": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRvYPV0HsWSIyIkWiqtNHwg9S7s7sd7K66b3SR5BbJQ-LLf32p5yjgK37w",
+                  "width": "225",
+                  "height": "225"
+               }
+            ],
+            "metatags": [
+               {
+                  "referrer": "origin",
+                  "og:image": "https://lolg-cdn.porofessor.gg/img/logo.png",
+                  "theme-color": "#2AA3CC",
+                  "twitter:title": "LoL Champions & Summoners Stats & Rankings - LeagueOfGraphs",
+                  "twitter:card": "summary",
+                  "twitter:site": "@leagueofgraphs",
+                  "cv": "CV-AlNRvAMh8JFZ:",
+                  "viewport": "width=device-width, initial-scale=1.0",
+                  "twitter:description": "We track the millions of LoL games played every day to gather champion stats, matchups, builds & summoner rankings, as well as champion stats, popularity, winrate, teams rankings, best items and spells.",
+                  "twitter:creator": "@leagueofgraphs",
+                  "twitter:image": "https://lolg-cdn.porofessor.gg/img/logo.png"
+               }
+            ],
+            "cse_image": [
+               {
+                  "src": "https://lolg-cdn.porofessor.gg/img/logo.png"
+               }
+            ]
+         },
+         "displayLink": "www.leagueofgraphs.com",
+         "link": "https://www.leagueofgraphs.com/",
+         "htmlSnippet": "We track the millions of <b>LoL<\/b> games played every day to gather champion stats, matchups, builds &amp; summoner rankings, as well as champion stats, popularity,&nbsp;...",
+         "title": "LeagueOfGraphs: LoL Champions & Summoners Stats & Rankings",
+         "formattedUrl": "https://www.leagueofgraphs.com/",
+         "cacheId": "wf1zQOTHn9gJ"
+      },
+      {
+         "snippet": "Official League of Legends phone case collection in partnership with Riot Games. Choose your champion and let the battle for Runeterra begin!",
+         "htmlFormattedUrl": "https://rhinoshield.eu/collections/collab-<b>league-of-legends<\/b>",
+         "htmlTitle": "<b>League of Legends<\/b> (<b>LOL<\/b>) Phone Case \u2013 RhinoShield Europe",
+         "kind": "customsearch#result",
+         "pagemap": {
+            "metatags": [
+               {
+                  "twitter:title": "League of Legends (LOL) Phone Case \u2013 RhinoShield Europe",
+                  "twitter:image:width": "100",
+                  "viewport": "width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0",
+                  "shopify-digital-wallet": "/1424916549/digital_wallets/dialog",
+                  "twitter:image:height": "100",
+                  "shopify-checkout-api-token": "2bd435304d8bdebb743bcb635b4749c8",
+                  "twitter:image": "https://cdn.shopify.com/s/files/1/0014/2491/6549/t/527/assets/rhino-logo.jpg?v=17400066498401376419"
+               }
+            ]
+         },
+         "displayLink": "rhinoshield.eu",
+         "link": "https://rhinoshield.eu/collections/collab-league-of-legends",
+         "htmlSnippet": "Official <b>League of Legends<\/b> phone case collection in partnership with Riot Games. Choose your champion and let the battle for Runeterra begin!",
+         "title": "League of Legends (LOL) Phone Case \u2013 RhinoShield Europe",
+         "formattedUrl": "https://rhinoshield.eu/collections/collab-league-of-legends",
+         "cacheId": "pyW-segXDB8J"
+      }
+   ],
+   "url": {
+      "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json",
+      "type": "application/json"
+   }
+}
