@@ -1,6 +1,7 @@
 package com.glecun.seoserps.infrastructure
 
 import com.glecun.seoserps.domain.entity.Site
+import com.glecun.seoserps.domain.entity.Sites
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.mockk
@@ -12,6 +13,7 @@ import org.jsoup.HttpStatusException
 import org.jsoup.Jsoup
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.springframework.boot.context.properties.bind.Bindable.listOf
 import java.util.Arrays
 import java.util.Arrays.asList
 import java.util.Collections
@@ -33,20 +35,26 @@ internal class GoogleAdapterTest {
         } returns response
         mockkStatic("org.jsoup.Jsoup")
         every {
-            Jsoup.connect("https://www.leagueofgraphs.com/").get().text()
-        } returns "leagueofgraphs text"
+            Jsoup.connect("https://www.leagueofgraphs.com/")
+        } returns  mockk {
+            every { execute() } returns mockk { every { statusCode() } returns 200 }
+            every { get() } returns mockk { every { text() } returns "leagueofgraphs text" }
+        }
         every {
-            Jsoup.connect("https://rhinoshield.eu/collections/collab-league-of-legends").get().text()
-        } returns "rhinoshield text"
+            Jsoup.connect("https://rhinoshield.eu/collections/collab-league-of-legends")
+        } returns  mockk {
+            every { execute() } returns mockk { every { statusCode() } returns 200 }
+            every { get() } returns mockk { every { text() } returns "rhinoshield text" }
+        }
 
         val bestSitesForRequest = googleAdapter.getBestSitesForRequest(request)
 
         assertEquals(
             bestSitesForRequest,
-            listOf(
+            Sites(listOf(
                 Site("leagueofgraphs text We track the millions of LoL games played every day to gather champion stats, matchups, builds & summoner rankings, as well as champion stats, popularity, ..."),
                 Site("rhinoshield text Official League of Legends phone case collection in partnership with Riot Games. Choose your champion and let the battle for Runeterra begin!")
-            )
+            ))
         )
 
     }
@@ -70,7 +78,7 @@ internal class GoogleAdapterTest {
 
         assertEquals(
             bestSitesForRequest,
-            singletonList(Site("snippet"))
+            Sites(singletonList(Site("snippet")))
         )
     }
 }

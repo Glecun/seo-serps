@@ -24,7 +24,6 @@ dependencies {
 	implementation("com.github.jkcclemens:khttp:0.1.0")
 	implementation("org.jsoup:jsoup:1.14.3")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.12.0")
 }
