@@ -23,6 +23,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("com.github.jkcclemens:khttp:0.1.0")
 	implementation("org.jsoup:jsoup:1.14.3")
+	implementation("io.github.microutils:kotlin-logging:2.0.11")
+	implementation("org.slf4j:slf4j-api:1.7.32") { because("Required by kotlin-logging") }
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.12.0")

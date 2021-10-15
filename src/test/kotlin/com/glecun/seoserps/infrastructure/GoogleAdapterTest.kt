@@ -35,13 +35,13 @@ internal class GoogleAdapterTest {
         } returns response
         mockkStatic("org.jsoup.Jsoup")
         every {
-            Jsoup.connect("https://www.leagueofgraphs.com/")
+            Jsoup.connect("https://www.leagueofgraphs.com/").ignoreHttpErrors(true)
         } returns  mockk {
             every { execute() } returns mockk { every { statusCode() } returns 200 }
             every { get() } returns mockk { every { text() } returns "leagueofgraphs text" }
         }
         every {
-            Jsoup.connect("https://rhinoshield.eu/collections/collab-league-of-legends")
+            Jsoup.connect("https://rhinoshield.eu/collections/collab-league-of-legends").ignoreHttpErrors(true)
         } returns  mockk {
             every { execute() } returns mockk { every { statusCode() } returns 200 }
             every { get() } returns mockk { every { text() } returns "rhinoshield text" }
@@ -71,7 +71,7 @@ internal class GoogleAdapterTest {
         mockkStatic("org.jsoup.Jsoup")
         val responseJsoup = mockk<Connection.Response> { every { statusCode() } returns 403 }
         every {
-            Jsoup.connect("http://error.com").execute()
+            Jsoup.connect("http://error.com").ignoreHttpErrors(true).execute()
         } returns responseJsoup
 
         val bestSitesForRequest = googleAdapter.getBestSitesForRequest(request)
