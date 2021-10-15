@@ -3,28 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <title>seo-serps</title>
+    <style>
+        body {
+            font-family: Arial,sans-serif;
+        }
+
+        .input-search {
+            width: clamp(50px, 411px, 411px);
+            height: 5vh;
+            font-size: 1.2em;
+            border-radius: 4px;
+            border: 1px solid #ababab;
+            margin-bottom: 10px;
+        }
+
+        .word {
+            width: clamp(100px, 90vw, 400px);
+            padding: 6px;
+            box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+            margin-top: 4px;
+            border-left: 5px solid blue;
+            display: flex;
+        }
+
+        .word .word-nb {
+            width: 30px;
+            color: #8c8c8c;
+            margin-left: auto;
+            font-size: 13px;
+        }
+
+        .animated-fast {
+            -webkit-animation-duration: 0.2s;
+            animation-duration: 0.2s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                -webkit-transform: translate3d(10px, 0, 0);
+                transform: translate3d(10px, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        .fadeInRight {
+            -webkit-animation-name: fadeInRight;
+            animation-name: fadeInRight;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            display: block;
+            margin: 20px 0 0 170px;
+            position: relative;
+            border: 3px solid #3b3bef;
+            border-radius: 50%;
+            box-sizing: border-box;
+            animation: animloader 2s linear infinite;
+        }
+        .loader::after {
+            content: '';
+            box-sizing: border-box;
+            width: 6px;
+            height: 24px;
+            background: #3b3bef;
+            transform: rotate(-45deg);
+            position: absolute;
+            bottom: -20px;
+            left: 46px;
+        }
+
+        @keyframes animloader {
+            0% {
+                transform: translate(-10px, -10px);
+            }
+            25% {
+                transform: translate(-10px, 10px);
+            }
+            50% {
+                transform: translate(10px, 10px);
+            }
+            75% {
+                transform: translate(10px, -10px);
+            }
+            100% {
+                transform: translate(-10px, -10px);
+            }
+        }
+
+    </style>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('searchComponent', () => ({
+                search: "",
+                words: [],
+                isLoading: false,
+                updateWords() {
+                    this.isLoading = true;
+                    fetch('/words?sentence='+ this.search)
+                          .then(response => response.json())
+                          .then(response => {
+                              this.words = response.words
+                              this.isLoading = false;
+                          })
+                }
+            }))
+        })
+    </script>
 </head>
 <body>
-<p>Pour commencer, je lis un mur car il est évident que si je jette un pitbull sur la Joconde, alors le cactus hexagonal
-    boit le chat magenta. Il est évident que si j'invente le lampadaire à voile et je déclare la guerre à la Suisse,
-    alors le crayon chasse la salle de bain. Le seul moyen de le stopper serait que l'épervier reluque l’atmosphère en
-    sifflant l'alphabet, cela aurait les mêmes conséquences que si j'écris une citrouille.</p>
-<p>Lorsque la tuberculose embrasse les hippodromes, je n'oublie surtout pas que l'abus de modération est dangereux pour
-    la santé de l'alcool. Néanmoins, le dimanche, c'est comme le lundi. Mais en diagonale équilatérale. pour ne surtout
-    pas que le calamar cuit la sortie de secours. La roue de la fortune préfère la pelouse donc les pieds c'est comme
-    les dents mais en plus mou. Comme Voltaire le disait toujours: << j'exécute mon étagère >>. Tout ca pour dire que
-    le chacal est en ébullition.</p>
-<p>Le seul moyen de le stopper serait que je gonfle ma perruque, cela aurait les mêmes conséquences que si la rivière se
-    noie dans l'océan. Il est évident que si la saucisse est dans la lampe, alors les tomates caressent le jerrican.
-    Lorsque si ton tonton tond ton tonton, ton tonton tondu sera, je n'oublie surtout pas que le gazon part en vacances.
-    Tout ca pour dire que si les voitures avaient des roues carrées ça marcherait vachement moins bien.</p>
-<p>Que diriez-vous si la biquette escalade le monocycle ?. Que diriez-vous si la cannette de bière allume le radiateur
-    pour regarder la télé ?. Imaginons maintenant que un anglo-arabe tapisse le mur de son tracteur pourquoi ne pas, en
-    plus, faire en sorte que pour manger l'hibiscus la danse symphonique s'impose.</p>
-<p>Tout ca pour dire que le pôt de fleur râpe le caniveau. Les protéines laitières sont vos amis pour la vie donc la
-    vache va sur internet pour apprendre à faire du banjo. Après la douche, je me dit toujours que la saucisse est dans
-    la lampe. Néanmoins, la chausette arrive à point pour sautée pour ne surtout pas que mon anti-dérapant joue de la
-    batterie en sixte mineure. Imaginons maintenant que les boulots ne sont pas à l'envers pourquoi ne pas, en plus,
-    faire en sorte que le canard noie la spatule.</p>
+<h1>Seo-Serps</h1>
+<div x-data="searchComponent">
+    <input class="input-search" type="text" x-model="search" x-on:input.debounce.700ms="updateWords()" placeholder="Search...">
+    <div>
+        <span x-show="isLoading" class="loader" x-transition></span>
+        <template x-if="!isLoading && words.length > 0" x-for="word in words" >
+            <div class="word animated-fast fadeInRight">
+                <span x-text="word.word" class="word-txt"></span>
+                <span x-text="word.nb" class="word-nb"></span>
+            </div>
+        </template>
+    </div>
+</div>
 </body>
 </html>
