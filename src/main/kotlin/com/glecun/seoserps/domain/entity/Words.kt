@@ -14,5 +14,18 @@ data class Words (val words: List<Word>) {
         )
     }
 
+    fun removeStopwords(stopwords: List<String>): Words = Words(words.filter { !stopwords.contains(it.word) })
+
+    fun sanitizeWords(): Words {
+        return Words(words
+            .map { Word(
+                    it.word
+                        .filter { letter -> letter.isLetter() || letter == '\'' }
+                        .lowercase(),
+                    it.nb
+            )}
+            .filter { it.word.isNotBlank() }
+        )
+    }
     fun sort(): Words = Words(words.sortedByDescending { it.nb })
 }
