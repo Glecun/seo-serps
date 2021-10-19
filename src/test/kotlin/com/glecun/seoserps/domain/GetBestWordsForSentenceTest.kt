@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class GetBestWordsForSentenceTest {
-    val googlePort : GooglePort = mockk()
-    val stopwordsPort : StopwordsPort = mockk()
+    private val googlePort : GooglePort = mockk()
+    private val stopwordsPort : StopwordsPort = mockk()
 
     @InjectMockKs
     val getBestWordsForSentence = GetBestWordsForSentence(googlePort, stopwordsPort)
@@ -25,17 +25,17 @@ internal class GetBestWordsForSentenceTest {
                 Sites(listOf(Site("mdr mdr lol"), Site("mdr kikou lol")))
         every { stopwordsPort.getStopwords() } returns emptyList()
 
-        val bestWordsForSentence = getBestWordsForSentence("lol")
+        val bestWordsForSentence = getBestWordsForSentence("lol", 0)
 
         assertEquals(
-            bestWordsForSentence,
             Words(
                 listOf(
                     Word("mdr", 3),
                     Word("lol", 2),
                     Word("kikou", 1)
                 )
-            )
+            ),
+            bestWordsForSentence
         )
     }
 
@@ -46,17 +46,17 @@ internal class GetBestWordsForSentenceTest {
 
         every { stopwordsPort.getStopwords() } returns listOf("un", "a")
 
-        val bestWordsForSentence = getBestWordsForSentence("lol")
+        val bestWordsForSentence = getBestWordsForSentence("lol", 0)
 
         assertEquals(
-            bestWordsForSentence,
             Words(
                 listOf(
                     Word("cats", 2),
                     Word("devenir", 1),
                     Word("become", 1)
                 )
-            )
+            ),
+            bestWordsForSentence
         )
     }
 
@@ -67,17 +67,31 @@ internal class GetBestWordsForSentenceTest {
 
         every { stopwordsPort.getStopwords() } returns emptyList()
 
-        val bestWordsForSentence = getBestWordsForSentence("lol")
+        val bestWordsForSentence = getBestWordsForSentence("lol", 0)
 
         assertEquals(
-            bestWordsForSentence,
             Words(
                 listOf(
                     Word("lol", 1),
                     Word("m'dr", 1),
                     Word("tata", 1)
                 )
-            )
+            ),
+            bestWordsForSentence
+        )
+    }
+
+    @Test
+    internal fun `should keep words with multiple occurrences`() {
+        every { googlePort.getBestSitesForRequest("lol") } returns
+                Sites(listOf(Site("lol toto"), Site("lol tata")))
+        every { stopwordsPort.getStopwords() } returns emptyList()
+
+        val bestWordsForSentence = getBestWordsForSentence("lol", 2)
+
+        assertEquals(
+            Words(listOf(Word("lol", 2))),
+            bestWordsForSentence
         )
     }
 }

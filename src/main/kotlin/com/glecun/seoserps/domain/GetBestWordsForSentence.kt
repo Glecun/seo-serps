@@ -12,12 +12,13 @@ class GetBestWordsForSentence @Autowired constructor(
     val googlePort: GooglePort,
     val stopwordsPort: StopwordsPort,
     ){
-    operator fun invoke(sentence: String): Words {
+    operator fun invoke(sentence: String, nbOccurrencesToKeepWord: Int = 5): Words {
         return googlePort.getBestSitesForRequest(sentence)
             .splitToWords()
             .sanitizeWords()
             .removeStopwords(stopwordsPort.getStopwords())
             .regroupByWords()
+            .keepWordsWithAtLeastNbOccurences(nbOccurrencesToKeepWord)
             .sort()
     }
 }

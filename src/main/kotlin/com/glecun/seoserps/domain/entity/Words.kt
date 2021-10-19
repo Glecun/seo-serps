@@ -27,5 +27,9 @@ data class Words (val words: List<Word>) {
             .filter { it.word.isNotBlank() }
         )
     }
+
+    fun keepWordsWithAtLeastNbOccurences(nbOccurrencesToKeepWord: Int): Words =
+        Words(words.filter { it.nb >= nbOccurrencesToKeepWord })
+
     fun sort(): Words = Words(words.sortedByDescending { it.nb })
 }
