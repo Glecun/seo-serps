@@ -9,6 +9,7 @@ import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Repository
+import java.net.URLEncoder
 import javax.net.ssl.SSLException
 
 private val logger = KotlinLogging.logger { }
@@ -22,7 +23,7 @@ class GoogleAdapter(
     override fun getBestSitesForRequest(request: String): Sites {
         return Sites(
             (khttp
-            .get("https://www.googleapis.com/customsearch/v1?key=${googleKey}&cx=${googleCx}&cr=countryFR&q=${request}")
+            .get("https://www.googleapis.com/customsearch/v1?key=${googleKey}&cx=${googleCx}&cr=countryFR&q=${URLEncoder.encode(request, "utf-8")}")
             .jsonObject["items"] as JSONArray)
             .map {
                 val url = readJsonObject(it, "link")
