@@ -141,7 +141,7 @@
     <input class="input-search" type="text" x-model="search" x-on:input.debounce.700ms="updateWords()" placeholder="Search...">
     <div>
         <span x-show="isLoading" class="loader" x-transition></span>
-        <template x-if="!isLoading && words.length > 0 && word" x-for="word in words">
+        <template x-if="!isLoading && words.length > 0 && word" x-for="word in words" :key="word.word">
             <div class="word animated-fast fadeInRight" x-bind:class="word.checked ? 'checked' : ''">
                 <span x-text="word.word" class="word-txt"></span>
                 <span x-text="word.nb" class="word-nb"></span>
