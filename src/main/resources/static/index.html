@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:x-bind="http://www.w3.org/1999/xhtml" xmlns:x-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>seo-serps</title>
@@ -26,11 +26,25 @@
             display: flex;
         }
 
+        .word.checked {
+            background: #f1f1f1;
+            font-style: italic;
+        }
+
+        .word > * {
+            display: flex;
+            align-items: center;
+        }
+
         .word .word-nb {
             width: 30px;
             color: #8c8c8c;
             margin-left: auto;
             font-size: 13px;
+        }
+
+        .word .word-checkbox{
+            cursor: pointer;
         }
 
         .animated-fast {
@@ -128,9 +142,10 @@
     <div>
         <span x-show="isLoading" class="loader" x-transition></span>
         <template x-if="!isLoading && words.length > 0 && word" x-for="word in words">
-            <div class="word animated-fast fadeInRight">
+            <div class="word animated-fast fadeInRight" x-bind:class="word.checked ? 'checked' : ''">
                 <span x-text="word.word" class="word-txt"></span>
                 <span x-text="word.nb" class="word-nb"></span>
+                <input type="checkbox" class="word-checkbox" x-model="word.checked"/>
             </div>
         </template>
     </div>
