@@ -28,8 +28,9 @@ class GoogleAdapter(
             .map {
                 val url = readJsonObject(it, "link")
                 retriesIfFails(3, url) {
-                    val connect = Jsoup.connect(url).ignoreHttpErrors(true)
-                    if (connect.execute().statusCode() == 200) {
+                    val connect = Jsoup.connect(url).ignoreContentType(true).ignoreHttpErrors(true)
+                    val response = connect.execute()
+                    if (response.statusCode() == 200 && response.contentType() != "application/pdf") {
                         connect.get().text() + " " + readJsonObject(it, "snippet")
                     } else {
                         readJsonObject(it, "snippet")
